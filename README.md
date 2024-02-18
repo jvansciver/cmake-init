@@ -40,77 +40,79 @@ cmake-init specific, then you may also ask questions in this repository's
 
 ## Goals
 
-* Be simple to use  
-  The script allows you to just mash enter to get you a correctly set up
-  project for an executable. You want a header-only library? Choose `h` when
-  prompted. Static/shared library? Just choose `s` when prompted. Simple
-  **and** correct!
-* Create [`FetchContent`][1] ready projects  
-  This is important, because in the near feature this might allow CMake to
-  consume other projects in a trivial fashion similar to other languages, e.g.
-  in JavaScript's case (npm).
-* Cleanly separate developer and consumer targets  
-  This ties into the previous point as well, but developers and consumers of a
-  project have different needs, and separating targets achieves that goal. A
-  developer should be able to run tests, add warning flags, run benchmarks,
-  etc., while a consumer, such as a package maintainer, generally only wants to
-  build the library or the executable itself, without having to patch around in
-  the CMake scripts. Show some love to your package maintainers!
-* Use modern CMake (3.14+)  
-  There are too many outdated and plain wrong examples on the internet, it's
-  time to change that.
-* Make usage of tools easy  
-  Code coverage (gcov), code linting and formatting (clang-format), static
-  analysis (clang-tidy) and dynamic analysis (sanitizers, valgrind) are all
-  very helpful ways to guide the developer in creating better software, so they
-  should be easy to use.
+-   Be simple to use  
+    The script allows you to just mash enter to get you a correctly set up
+    project for an executable. You want a header-only library? Choose `h` when
+    prompted. Static/shared library? Just choose `s` when prompted. Simple
+    **and** correct!
+-   Create [`FetchContent`][1] ready projects  
+    This is important, because in the near feature this might allow CMake to
+    consume other projects in a trivial fashion similar to other languages, e.g.
+    in JavaScript's case (npm).
+-   Cleanly separate developer and consumer targets  
+    This ties into the previous point as well, but developers and consumers of a
+    project have different needs, and separating targets achieves that goal. A
+    developer should be able to run tests, add warning flags, run benchmarks,
+    etc., while a consumer, such as a package maintainer, generally only wants to
+    build the library or the executable itself, without having to patch around in
+    the CMake scripts. Show some love to your package maintainers!
+-   Use modern CMake (3.14+)  
+    There are too many outdated and plain wrong examples on the internet, it's
+    time to change that.
+-   Make usage of tools easy  
+    Code coverage (gcov), code linting and formatting (clang-format), static
+    analysis (clang-tidy) and dynamic analysis (sanitizers, valgrind) are all
+    very helpful ways to guide the developer in creating better software, so they
+    should be easy to use.
 
 ### Relevant conference talks
 
-* [Kenneth Hoste - How To Make Package Managers Cry
-](https://www.youtube.com/watch?v=NSemlYagjIU)
-* [Robert Schumacher - Don't package your libraries, write packagable
-libraries! (Part 1)](https://www.youtube.com/watch?v=sBP17HQAQjk)
-* [Robert Schumacher - Don't package your libraries, write packagable
-libraries! (Part 2)](https://www.youtube.com/watch?v=_5weX5mx8hc)
-* [Craig Scott - Deep CMake for Library Authors
-](https://www.youtube.com/watch?v=m0DwB4OvDXk)
+-   [Kenneth Hoste - How To Make Package Managers Cry
+    ](https://www.youtube.com/watch?v=NSemlYagjIU)
+-   [Robert Schumacher - Don't package your libraries, write packagable
+    libraries! (Part 1)](https://www.youtube.com/watch?v=sBP17HQAQjk)
+-   [Robert Schumacher - Don't package your libraries, write packagable
+    libraries! (Part 2)](https://www.youtube.com/watch?v=_5weX5mx8hc)
+-   [Craig Scott - Deep CMake for Library Authors
+    ](https://www.youtube.com/watch?v=m0DwB4OvDXk)
+-   [Daniel Pfeifer - Effective CMake](https://www.youtube.com/watch?v=rLopVhns4Zs)
 
 ## Non-goals
 
-* Cover every possible project structure  
-  Doing this is pointless as an init script, because there are far too many
-  ways people have been building software, and if you have special needs, you
-  ought to already know CMake and you can set the project up yourself.
-* Generate files and show tips for websites other than GitHub  
-  While I understand the people who are against GitHub (and by proxy
-  Microsoft), it's by far the most used website of its kind, the files and
-  messages specific to it are small in number, and they are easily adapted for
-  any other service.
+-   Cover every possible project structure  
+    Doing this is pointless as an init script, because there are far too many
+    ways people have been building software, and if you have special needs, you
+    ought to already know CMake and you can set the project up yourself.
+-   Generate files and show tips for websites other than GitHub  
+    While I understand the people who are against GitHub (and by proxy
+    Microsoft), it's by far the most used website of its kind, the files and
+    messages specific to it are small in number, and they are easily adapted for
+    any other service.
 
 ## Install
 
 Make sure you have these programs installed:
 
-* Python 3.8 or newer
-* CMake 3.20 or newer
-* git
-* [clang-tidy 14](#clang-tidy) (optional)
-* [cppcheck](#cppcheck) (optional)
-* [Doxygen < 1.9](#doxygen) (optional)
-* [LCOV](#lcov) (optional)
-* [clang-format 14](#clang-format) (optional)
-* [codespell](#codespell) (optional)
-* [Package managers](#package-managers): Conan or vcpkg (optional)
+-   Python 3.8 or newer
+-   CMake 3.20 or newer
+-   git
+-   [clang-tidy 14](#clang-tidy) (optional)
+-   [cppcheck](#cppcheck) (optional)
+-   [Doxygen < 1.9](#doxygen) (optional)
+-   [LCOV](#lcov) (optional)
+-   [clang-format 14](#clang-format) (optional)
+-   [codespell](#codespell) (optional)
+-   [Package managers](#package-managers): Conan or vcpkg (optional)
 
 ---
+
 **NOTE**
 
 Some of these tools can be used on Windows as well if you want to use Visual
 Studio, but you have to install these addins:
 
-- https://clangpowertools.com/
-- https://github.com/VioletGiraffe/cppcheck-vs-addin
+-   https://clangpowertools.com/
+-   https://github.com/VioletGiraffe/cppcheck-vs-addin
 
 ---
 
@@ -212,33 +214,33 @@ mode using the `spell-check` and `spell-fix` targets respectively.
 The `-p` flag can be used to select a package manager for the project.
 Arguments for the flag can be:
 
-* `none`: no package manager integration (default)
-* `conan`: [Conan][20] integration
-* `vcpkg`: [vcpkg][21] integration
+-   `none`: no package manager integration (default)
+-   `conan`: [Conan][20] integration
+-   `vcpkg`: [vcpkg][21] integration
 
 When using a package manager, the following packages are used in the generated
 project:
 
-* [fmt][22] for C++, [json-c][23] and [hedley][25] (exe only) for C projects
-* [Catch2][24] as a dev dependency for C++ and C projects
+-   [fmt][22] for C++, [json-c][23] and [hedley][25] (exe only) for C projects
+-   [Catch2][24] as a dev dependency for C++ and C projects
 
 Make sure to read the generated HACKING document to see what needs to be done
 to fetch dependencies.
 
 ## Usage
 
-* `cmake-init [--c] <path>`  
-  This command will create a CMake project at the provided location and
-  according to the answers given to the prompts. You may pass the `-s`, `-e` or
-  `-h` flags after to quickly create a shared library, executable or a header
-  only library respectively. The `--c` switch will set the generated project's
-  type to C instead of C++.
-* `cmake-init --help`  
-  Shows the help screen for more flags and switches.
+-   `cmake-init [--c] <path>`  
+    This command will create a CMake project at the provided location and
+    according to the answers given to the prompts. You may pass the `-s`, `-e` or
+    `-h` flags after to quickly create a shared library, executable or a header
+    only library respectively. The `--c` switch will set the generated project's
+    type to C instead of C++.
+-   `cmake-init --help`  
+    Shows the help screen for more flags and switches.
 
 ## Licensing
 
-[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)][2]  
+[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)][2]
 
 `cmake-init` is Free Software: You can use, study, share and improve it at your
 will. Specifically you can redistribute and/or modify it under the terms of the
